@@ -1,0 +1,13 @@
+---ADMIN---
+"username":"ilijas19"
+"password":"ilijas19"
+
+--STAFF--
+"username":"george",
+"password":"george"
+--------
+"username":"susan",
+"password":"susan"
+--------
+"username":"mike",
+"password":"mike"
