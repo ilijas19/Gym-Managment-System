@@ -15,6 +15,10 @@ const errorHandler = (err, req, res, next) => {
       msg: `Duplicate value entered for ${Object.keys(err.keyValue)}`,
     });
   }
+  if (err.name === "ValidationError") {
+    const customMsg = Object.values(err.errors).map((item) => item.message);
+    return res.status(StatusCodes.BAD_REQUEST).json({ msg: customMsg });
+  }
   res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
     .json({ msg: "Something Went Wrong" });
