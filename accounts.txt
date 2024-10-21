@@ -11,3 +11,8 @@
 --------
 "username":"mike",
 "password":"mike"
+
+
+---Trainers---
+"username":"trainer1",
+"password":"trainer1"
