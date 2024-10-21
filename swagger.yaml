@@ -1,0 +1,350 @@
+openapi: 3.0.0
+info:
+  title: 13-Gym-Managment-System
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api/v1
+tags:
+  - name: Auth
+  - name: Admin
+  - name: Staff (members)
+  - name: Staff (trainers)
+  - name: Trainer
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Staff Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: ilijas19
+                password: ilijas19
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/trainerLogin:
+    post:
+      tags:
+        - Auth
+      summary: Trainer Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: trainer1
+                password: trainer1
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/showMe:
+    get:
+      tags:
+        - Auth
+      summary: Show Current User
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin:
+    post:
+      tags:
+        - Admin
+      summary: Create Staff Member
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Ilija Gocic
+                username: ilijas19
+                password: ilijas19
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Admin
+      summary: Get All Staff Members
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/67153b6ff7aa0bacc7f9d159:
+    get:
+      tags:
+        - Admin
+      summary: Get Staff Member
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - Admin
+      summary: Update Staff Member
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: georgee
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/67153b85f7aa0bacc7f9d15b:
+    delete:
+      tags:
+        - Admin
+      summary: Delete Staff Member
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/resetPassword/67153b6ff7aa0bacc7f9d159:
+    patch:
+      tags:
+        - Admin
+      summary: Reset Staff Password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                password: george
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /staff/member/:
+    post:
+      tags:
+        - Staff (members)
+      summary: Register Member
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                fullName: steven individual
+                email: stevenind@gmail.com
+                membershipPlan: individual
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Staff (members)
+      summary: Get All Members
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /staff/member/671649399b0e79009c5b5d81:
+    get:
+      tags:
+        - Staff (members)
+      summary: Member Check In
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - Staff (members)
+      summary: Update Member
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                fullName: ana anic
+                email: ana@gmail.com
+                membershipPlan: open-gym
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /staff/member/123:
+    delete:
+      tags:
+        - Staff (members)
+      summary: Delete Member
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /staff/renew/671649399b0e79009c5b5d81:
+    patch:
+      tags:
+        - Staff (members)
+      summary: Renew Membership
+      requestBody:
+        content: {}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /staff/trainer/:
+    post:
+      tags:
+        - Staff (trainers)
+      summary: Register Trainer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: trainer1
+                username: trainer1
+                password: trainer1
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Staff (trainers)
+      summary: Get All Trainers
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /staff/trainer/6716646262904a13e10bb63d:
+    get:
+      tags:
+        - Staff (trainers)
+      summary: Get Single Trainer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - Staff (trainers)
+      summary: Update Trainer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: trainer1
+                username: trainer1
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /staff/trainer/123:
+    delete:
+      tags:
+        - Staff (trainers)
+      summary: Delete Trainer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /trainer/:
+    post:
+      tags:
+        - Trainer
+      summary: Add New Client
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 671649399b0e79009c5b5d81
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Trainer
+      summary: Get All Clients
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /trainer/671649399b0e79009c5b5d81:
+    delete:
+      tags:
+        - Trainer
+      summary: Remove client
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Trainer
+      summary: Find Single Client
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /trainer/123:
+    post:
+      tags:
+        - Trainer
+      summary: Send Mail To Client
+      requestBody:
+        content: {}
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
