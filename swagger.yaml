@@ -3,7 +3,7 @@ info:
   title: 13-Gym-Managment-System
   version: 1.0.0
 servers:
-  - url: http://localhost:5000/api/v1
+  - url: https://gym-managment-system-api.onrender.com/api/v1
 tags:
   - name: Auth
   - name: Admin
