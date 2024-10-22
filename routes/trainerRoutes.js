@@ -20,12 +20,9 @@ router
   .post(authenticateUser, authorizePermission("trainer"), addNewClient);
 
 router
-  .route("/sendMail/:id")
-  .post(authenticateUser, authorizePermission("trainer"), sendMailToClient);
-
-router
   .route("/:id")
   .get(authenticateUser, authorizePermission("trainer"), findSingleClient)
+  .post(authenticateUser, authorizePermission("trainer"), sendMailToClient)
   .delete(authenticateUser, authorizePermission("trainer"), removeClient);
 
 module.exports = router;
