@@ -2,6 +2,7 @@ const Trainer = require("../models/Trainer");
 const Member = require("../models/Member");
 const CustomError = require("../errors");
 const { StatusCodes } = require("http-status-codes");
+const sendMail = require("../utils/sendMail");
 
 const addNewClient = async (req, res) => {
   const loggedTrainer = await Trainer.findOne({ _id: req.user.userId });
@@ -19,11 +20,12 @@ const addNewClient = async (req, res) => {
   if (loggedTrainer.clients.includes(client._id)) {
     throw new CustomError.BadRequestError("already in your clients");
   }
+  client.membershipPlan = "individual";
   client.trainer = loggedTrainer._id;
   loggedTrainer.clients.push(client._id);
   await client.save({ validateModifiedOnly: true });
   await loggedTrainer.save({ validateModifiedOnly: true });
-  res.status(StatusCodes.OK).json({ loggedTrainer, client });
+  res.status(StatusCodes.OK).json({ msg: "Client Added", client });
 };
 
 const removeClient = async (req, res) => {
@@ -45,7 +47,7 @@ const removeClient = async (req, res) => {
     );
   }
   client.trainer = null;
-
+  client.membershipPlan = "open-gym";
   // Remove the client from the trainer's client list
   loggedTrainer.clients = loggedTrainer.clients.filter(
     (clientObjId) => clientObjId.toString() !== clientId
@@ -72,11 +74,44 @@ const getAllClients = async (req, res) => {
 };
 
 const findSingleClient = async (req, res) => {
-  res.send("comming soon");
+  const { id: clientId } = req.params;
+  if (!clientId) {
+    throw new CustomError.BadRequestError("client id needs to be provided");
+  }
+  const client = await Member.findOne({
+    _id: clientId,
+    trainer: req.user.userId,
+  });
+  if (!client) {
+    throw new CustomError.NotFoundError(
+      `You have no client with id: ${clientId}`
+    );
+  }
+  res.status(StatusCodes.OK).json({ client });
 };
 
 const sendMailToClient = async (req, res) => {
-  res.send("comming soon");
+  const { id: clientId } = req.params;
+  if (!clientId) {
+    throw new CustomError.BadRequestError("client id needs to be provided");
+  }
+  const client = await Member.findOne({
+    _id: clientId,
+    trainer: req.user.userId,
+  });
+  if (!client) {
+    throw new CustomError.NotFoundError(
+      `You have no client with id: ${clientId}`
+    );
+  }
+  const { message } = req.body;
+  if (!message) {
+    throw new CustomError.BadRequestError(
+      "Message For Client Must Be Provided"
+    );
+  }
+  await sendMail({ to: client.email, message });
+  res.status(StatusCodes.OK).json({ msg: "Mail sent to client" });
 };
 
 module.exports = {
