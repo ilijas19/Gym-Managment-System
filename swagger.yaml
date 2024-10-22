@@ -95,11 +95,18 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /admin/67153b6ff7aa0bacc7f9d159:
+  /admin/{id}:
     get:
       tags:
         - Admin
       summary: Get Staff Member
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Staff member ID
       responses:
         "200":
           description: Successful response
@@ -109,6 +116,13 @@ paths:
       tags:
         - Admin
       summary: Update Staff Member
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Staff member ID
       requestBody:
         content:
           application/json:
@@ -121,21 +135,34 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /admin/67153b85f7aa0bacc7f9d15b:
     delete:
       tags:
         - Admin
       summary: Delete Staff Member
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Staff member ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-  /admin/resetPassword/67153b6ff7aa0bacc7f9d159:
+  /admin/resetPassword/{id}:
     patch:
       tags:
         - Admin
       summary: Reset Staff Password
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Staff member ID
       requestBody:
         content:
           application/json:
@@ -159,8 +186,8 @@ paths:
             schema:
               type: object
               example:
-                fullName: steven individual
-                email: stevenind@gmail.com
+                fullName: ilija gocicc
+                email: ilijagocic1971@gmail.com
                 membershipPlan: individual
       responses:
         "200":
@@ -171,54 +198,63 @@ paths:
       tags:
         - Staff (members)
       summary: Get All Members
+      parameters:
+        - in: query
+          name: fullName
+          schema:
+            type: string
+          required: false
+          description: Filter members by full name (supports regex matching)
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-  /staff/member/671649399b0e79009c5b5d81:
+  /staff/member/{id}:
     get:
       tags:
         - Staff (members)
       summary: Member Check In
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Member ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-    patch:
-      tags:
-        - Staff (members)
-      summary: Update Member
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                fullName: ana anic
-                email: ana@gmail.com
-                membershipPlan: open-gym
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json: {}
-  /staff/member/123:
     delete:
       tags:
         - Staff (members)
       summary: Delete Member
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Member ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-  /staff/renew/671649399b0e79009c5b5d81:
+  /staff/renew/{id}:
     patch:
       tags:
         - Staff (members)
       summary: Renew Membership
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Member ID
       requestBody:
         content: {}
       responses:
@@ -254,38 +290,34 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /staff/trainer/6716646262904a13e10bb63d:
+  /staff/trainer/{id}:
     get:
       tags:
         - Staff (trainers)
       summary: Get Single Trainer
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Trainer ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-    patch:
-      tags:
-        - Staff (trainers)
-      summary: Update Trainer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                name: trainer1
-                username: trainer1
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json: {}
-  /staff/trainer/123:
     delete:
       tags:
         - Staff (trainers)
       summary: Delete Trainer
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Trainer ID
       responses:
         "200":
           description: Successful response
@@ -302,7 +334,7 @@ paths:
             schema:
               type: object
               example:
-                id: 671649399b0e79009c5b5d81
+                id: 67176b7c4dbee29f1541728d
       responses:
         "200":
           description: Successful response
@@ -317,11 +349,18 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /trainer/671649399b0e79009c5b5d81:
+  /trainer/{id}:
     delete:
       tags:
         - Trainer
-      summary: Remove client
+      summary: Remove Client
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Client ID
       responses:
         "200":
           description: Successful response
@@ -331,18 +370,37 @@ paths:
       tags:
         - Trainer
       summary: Find Single Client
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Client ID
       responses:
         "200":
           description: Successful response
           content:
             application/json: {}
-  /trainer/123:
+    /trainer/sendMail/{id}:
     post:
       tags:
         - Trainer
       summary: Send Mail To Client
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Client ID
       requestBody:
-        content: {}
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: "Hey this is your trainer"
       responses:
         "200":
           description: Successful response
