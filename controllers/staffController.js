@@ -20,6 +20,10 @@ const registerMember = async (req, res) => {
 };
 const getAllMembers = async (req, res) => {
   const queryObject = {};
+  const { fullName } = req.query;
+  if (fullName) {
+    queryObject.fullName = { $regex: fullName, $options: "i" };
+  }
   const members = await Member.find(queryObject);
   res.status(StatusCodes.OK).json({ members });
 };
